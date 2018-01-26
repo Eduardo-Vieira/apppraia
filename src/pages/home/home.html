@@ -16,10 +16,13 @@
     <button [color]="item.status" ion-item *ngFor="let item of dados" (click)="fechaAluguel(item)">
       <p>Produto: {{ item.produto }}</p>
       <p>Código: {{ item.cod }}</p>
+      <p>Qtd. Colete(s): {{ item.qtdColete }}</p>
       <p>Tempo: {{ item.codTempo }} | {{item.tempo}}</p>
       <p>Tempo Inicio: {{item.tempoInicio}} Tempo Fim:{{item.tempofim}}</p>      
       <p>Cliente: {{ item.cliente }}</p>
-      <p>Data: {{item.data}} Pago:{{item.isPago}}</p>
+      <p>Valor: {{ item.valoraluguel }}</p>
+      <p>Deposito: {{ item.deposito }}</p>
+      <p>Data: {{item.data}} Devolvido:<ion-badge color="secondary">{{item.isPago}}</ion-badge></p>
     </button>  
   </ion-list>
 </ion-content>

@@ -36,8 +36,10 @@ export class HomePage {
       let d = e.data.split('/');
       let hora = new Date(d[1].concat('/', d[0], '/', d[2], ' ', e.tempofim));
       let r = new Date();
-      if(r.getTime() >= hora.getTime()){
+      if(r.getTime() >= hora.getTime() &&  e.isPago==''){
         e.status = 'danger';
+      }else{
+        e.status ='';
       }
     });
   }
@@ -63,7 +65,7 @@ export class HomePage {
           text: 'Salvar',
           handler: data => {
             this.dados.forEach(e => {
-              if(e.id=item.id){
+              if(e.id == item.id){
                 e.isPago = data.Fechamento;
               }
             });
