@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Novo Aluguel</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+        <ion-label>Cliente:</ion-label>
+        <ion-input type="text" [(ngModel)]="formdata.cliente"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Produto:</ion-label>
+        <ion-select interface="action-sheet" [selectOptions]="selectOptionsProduto" [(ngModel)]="formdata.produto" okText="Ok" cancelText="Cancelar">
+            <ion-option *ngFor="let p of produtos" [value]="p.descricao">{{p.descricao}}</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>Tempo:</ion-label>
+        <ion-select interface="action-sheet" [selectOptions]="selectOptionsTempo" [(ngModel)]="formdata.codTempo" (ngModelChange)="setTempo()" okText="Ok" cancelText="Cancelar">
+            <ion-option *ngFor="let t of tempo" [value]="t.temp">{{t.temp}} - {{t.time}} - {{t.value}}</ion-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="isTimefull">
+      <ion-label>Tempo:</ion-label>
+      <ion-input type="text" [(ngModel)]="formdata.tempo"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="isTimefull">
+      <ion-label>Tempo Inicio:</ion-label>
+      <ion-input type="text" [(ngModel)]="formdata.tempoInicio"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="isTimefull">
+      <ion-label>Tempo Fim:</ion-label>
+      <ion-input type="text" [(ngModel)]="formdata.tempofim"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Código:</ion-label>
+      <ion-input type="number" [(ngModel)]="formdata.cod"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Qtd. Colete(s):</ion-label>
+      <ion-input type="number" [(ngModel)]="formdata.qtdColete"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Valor:</ion-label>
+      <ion-input type="text" [(ngModel)]="formdata.valoraluguel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Deposito:</ion-label>
+      <ion-input type="text" [(ngModel)]="formdata.deposito"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div padding>
+    <button ion-button block color="primary" (click)="save()">Salvar</button>
+  </div>
+</ion-content>

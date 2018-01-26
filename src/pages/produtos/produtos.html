@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Produtos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-fab  right bottom>
+        <button ion-fab color="primary" (click)="addItem()"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+    <ion-list>
+        <button ion-item *ngFor="let item of produtos" (click)="editItem(item)">
+          <p>Reg. Id: {{item.regidProd}}</p>
+          <p>Produto: {{item.descricao}}</p>
+          <p>Ativo: {{item.isActive}}</p>
+        </button>
+    </ion-list>
+</ion-content>

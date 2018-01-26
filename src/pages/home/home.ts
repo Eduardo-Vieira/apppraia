@@ -3,14 +3,17 @@ import { NavController } from 'ionic-angular';
 
 import { AlertController } from 'ionic-angular';
 
+import { DadosProvider } from '../../providers/dados/dados';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+
   public relogio = new Date();
 
-  public dados:any = [
+  public aluguel:any = [
     {id:1, data:'25/01/2018', produto:'Sup', cod:'1', codTempo:'A',tempo:'00:30:00',tempoInicio:'20:50:00', tempofim:'21:40:00',valoraluguel:'20,00',cliente:'Eduardo', qtdColete:'2', deposito:'20,00', isPago:'', status:''},
     {id:2, data:'25/01/2018', produto:'Sup', cod:'1', codTempo:'A',tempo:'00:30:00',tempoInicio:'20:50:00', tempofim:'21:40:00',valoraluguel:'20,00',cliente:'Eduardo', qtdColete:'2', deposito:'20,00', isPago:'', status:''},
     {id:3, data:'25/01/2018', produto:'Sup', cod:'1', codTempo:'A',tempo:'00:30:00',tempoInicio:'20:08:00', tempofim:'20:38:00',valoraluguel:'20,00',cliente:'Eduardo', qtdColete:'2', deposito:'20,00', isPago:'', status:''},
@@ -20,7 +23,7 @@ export class HomePage {
     {id:7, data:'25/01/2018', produto:'Caiak', cod:'2', codTempo:'A',tempo:'00:30:00',tempoInicio:'20:08:00', tempofim:'',valoraluguel:'20,00',cliente:'Nelson', qtdColete:'3', deposito:'10,00', isPago:'', status:''},
   ];
 
-  constructor(public navCtrl: NavController,public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController,public alertCtrl: AlertController, public dados:DadosProvider) {
 
 
   }
@@ -32,7 +35,7 @@ export class HomePage {
   }
 
   atualizarStatus(){
-    this.dados.forEach(e => {
+    this.aluguel.forEach(e => {
       let d = e.data.split('/');
       let hora = new Date(d[1].concat('/', d[0], '/', d[2], ' ', e.tempofim));
       let r = new Date();
@@ -64,7 +67,7 @@ export class HomePage {
         {
           text: 'Salvar',
           handler: data => {
-            this.dados.forEach(e => {
+            this.aluguel.forEach(e => {
               if(e.id == item.id){
                 e.isPago = data.Fechamento;
               }

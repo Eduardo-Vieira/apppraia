@@ -5,14 +5,28 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class DadosProvider {
 
+  private aluguel:any;
+
   constructor(public http: HttpClient,private storage: Storage) {
-  
+
   }
 
   getAluguel(){
-    this.storage.get('age').then((val) => {
-      return JSON.parse(val);
+    return new Promise(resolve=>{
+      this.storage.get('aluguel').then((val) => {
+        if(val !=null){
+          this.aluguel = JSON.parse(val);
+        }else{
+          this.aluguel =[];
+        }
+        resolve(this.aluguel);
+      });
     });
-  }  
-  
+  }
+
+  setAluguel(val:any){
+    this.aluguel.push(val);
+    this.storage.set('aluguel',JSON.stringify(this.aluguel));
+  }
+
 }

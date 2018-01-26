@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -9,11 +9,11 @@
 
 <ion-content>
     <ion-fab  right bottom>
-        <button ion-fab color="primary"><ion-icon name="add"></ion-icon></button>
+        <button ion-fab color="primary" (click)="addAluguel()"><ion-icon name="add"></ion-icon></button>
     </ion-fab>
 
   <ion-list>
-    <button [color]="item.status" ion-item *ngFor="let item of aluguel" (click)="fechaAluguel(item)">
+    <ion-item [color]="item.status"  *ngFor="let item of aluguel">
       <p>Produto: {{ item.produto }}</p>
       <p>Código: {{ item.cod }}</p>
       <p>Qtd. Colete(s): {{ item.qtdColete }}</p>
@@ -23,6 +23,9 @@
       <p>Valor: {{ item.valoraluguel }}</p>
       <p>Deposito: {{ item.deposito }}</p>
       <p>Data: {{item.data}} Devolvido:<ion-badge color="secondary">{{item.isPago}}</ion-badge></p>
-    </button>
+      <div item-end>
+        <button ion-button (click)="fechaAluguel(item)">Fecha</button><button ion-button color="danger" (click)="deleteAluguel(item)">Delete</button>
+      </div>
+    </ion-item>
   </ion-list>
 </ion-content>

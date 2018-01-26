@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Editar Produtos</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item>
+          <ion-label>Produto:</ion-label>
+          <ion-input type="text" [(ngModel)]="formdata.descricao"></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-list radio-group [(ngModel)]="formdata.isActive">
+            <ion-list-header>
+              Ativo?
+            </ion-list-header>
+            <ion-item>
+              <ion-label>Sim</ion-label>
+              <ion-radio value="s"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Não</ion-label>
+              <ion-radio value="n"></ion-radio>
+            </ion-item>
+      </ion-list>
+      <div padding>
+        <button ion-button block color="primary" (click)="save()">Salvar</button>
+      </div>
+</ion-content>
