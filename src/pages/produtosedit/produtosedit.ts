@@ -27,6 +27,7 @@ export class ProdutoseditPage {
   save(){
     //update row
     this.produtos.update(this.formdata);
+    this.navCtrl.pop();
   }
 
 }

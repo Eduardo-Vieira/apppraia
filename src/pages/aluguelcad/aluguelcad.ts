@@ -27,6 +27,7 @@ export class AluguelcadPage {
   public tempo:any = [{temp:'A', time:'30 min', value:'20,00'},
                       {temp:'B', time:'60 min', value:'30,00'},
                       {temp:'C', time:'full', value:'full'},
+                      {temp:'D', time:'Diversos', value:'Diversos'},
                      ];
 
   constructor(public navCtrl: NavController,
@@ -43,10 +44,11 @@ export class AluguelcadPage {
                   tempofim:'',
                   valoraluguel:'',
                   cliente:'',
-                  qtdColete:'',
+                  qtd:'',
                   deposito:'',
                   isDevolvido:'',
-                  status:''};
+                  status:'',
+                  obs:''};
 
                   this.selectOptionsProduto = {
                     title: 'Produtos',
@@ -86,6 +88,13 @@ export class AluguelcadPage {
         this.formdata.tempoInicio = h.toLocaleTimeString();
         this.formdata.tempofim = this.calcHora(h,60); //'60 min';
         this.formdata.valoraluguel = '30,00'
+        break;
+      case 'D':
+        this.isTimefull = true;
+        this.formdata.tempo ='0 min';
+        this.formdata.tempoInicio = h.toLocaleTimeString();
+        this.formdata.tempofim = h.toLocaleTimeString(); //'0 min';
+        this.formdata.valoraluguel = ''
         break;
       default:
         this.isTimefull = true;

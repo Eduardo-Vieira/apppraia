@@ -33,16 +33,15 @@ export class AluguelPage {
   }
 
   openModel(){
-    this.aluguel = this.mAluguel.get();
+      this.aluguel = this.mAluguel.get();
   }
 
   ionViewWillEnter(){
-    this.openModel();
-    console.log( this.aluguel);
-    //Varificar se tem algum fora do tempo fim
-    // setInterval(() => {
-    //    this.atualizarStatus();
-    // }, 3000);
+    this.openModel()
+      //Varificar se tem algum fora do tempo fim
+      setInterval(() => {
+         this.atualizarStatus();
+      }, 3000);
   }
 
   addAluguel(){
@@ -50,7 +49,7 @@ export class AluguelPage {
   }
 
   atualizarStatus(){
-    if(this.aluguel.length > 0){
+    if(this.aluguel && this.aluguel.length > 0){
       this.aluguel.forEach(e => {
         let d = e.data.split('/');
         let hora = new Date(d[1].concat('/', d[0], '/', d[2], ' ', e.tempofim));

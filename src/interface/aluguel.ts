@@ -12,8 +12,9 @@ export interface Aluguel {
   tempofim:string,
   valoraluguel:string,
   cliente:string,
-  qtdColete:string,
+  qtd:string,
   deposito:string,
   isDevolvido:string,
-  status:string
+  status:string,
+  obs:string,
 }

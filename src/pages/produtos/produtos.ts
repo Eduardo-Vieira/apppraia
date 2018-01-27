@@ -35,5 +35,6 @@ export class ProdutosPage {
 
   editItem(item:any){
     this.navCtrl.push(ProdutoseditPage,{data:item});
+    this.navCtrl.pop();
   }
 }

@@ -16,13 +16,14 @@
     <ion-item [color]="item.status"  *ngFor="let item of aluguel">
       <p>Produto: {{ item.produto }}</p>
       <p>Código: {{ item.cod }}</p>
-      <p>Qtd. Colete(s): {{ item.qtdColete }}</p>
+      <p>Quantidade: {{ item.qtd }}</p>
       <p>Tempo: {{ item.codTempo }} | {{item.tempo}}</p>
       <p>Tempo Inicio: {{item.tempoInicio}} Tempo Fim:{{item.tempofim}}</p>
       <p>Cliente: {{ item.cliente }}</p>
       <p>Valor: {{ item.valoraluguel }}</p>
       <p>Deposito: {{ item.deposito }}</p>
       <p>Data: {{item.data}} Devolvido:<ion-badge color="secondary">{{item.isPago}}</ion-badge></p>
+      <p>Obs: {{ item.obs }}</p>
       <div item-end>
         <button ion-button (click)="fechaAluguel(item)">Fecha</button><button ion-button color="danger" (click)="deleteAluguel(item)">Delete</button>
       </div>
