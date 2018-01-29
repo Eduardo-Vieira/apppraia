@@ -23,7 +23,8 @@ export class ProdutosnovoPage {
 
   save(){
     // Save row
-    this.produtos.set(this.formdata);
+    this.produtos.add(this.formdata);
+    this.navCtrl.pop();
   }
 
 }

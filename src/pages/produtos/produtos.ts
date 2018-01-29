@@ -23,7 +23,11 @@ export class ProdutosPage {
   }
 
   openModel(){
-    this.produtos = this.mProduto.get();
+    this.mProduto.open().then((data)=>{
+      if(data && data !=[]){
+        this.produtos = data;
+      }
+    });
   }
 
   /**
@@ -35,6 +39,5 @@ export class ProdutosPage {
 
   editItem(item:any){
     this.navCtrl.push(ProdutoseditPage,{data:item});
-    this.navCtrl.pop();
   }
 }

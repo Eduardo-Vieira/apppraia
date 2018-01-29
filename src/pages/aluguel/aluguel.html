@@ -14,6 +14,7 @@
 
   <ion-list>
     <ion-item [color]="item.status"  *ngFor="let item of aluguel">
+      <div class="card-item">
       <p>Produto: {{ item.produto }}</p>
       <p>Código: {{ item.cod }}</p>
       <p>Quantidade: {{ item.qtd }}</p>
@@ -24,9 +25,13 @@
       <p>Deposito: {{ item.deposito }}</p>
       <p>Data: {{item.data}} Devolvido:<ion-badge color="secondary">{{item.isPago}}</ion-badge></p>
       <p>Obs: {{ item.obs }}</p>
-      <div item-end>
-        <button ion-button (click)="fechaAluguel(item)">Fecha</button><button ion-button color="danger" (click)="deleteAluguel(item)">Delete</button>
+    </div>
+      <div text-left padding-top>
+        <button ion-button icon-left color="primary" (click)="fechaAluguel(item)"> <ion-icon name="checkmark"></ion-icon> Fecha</button>
+        <button ion-button icon-left color="danger" (click)="deleteAluguel(item)"><ion-icon name="trash"></ion-icon> Delete</button>
       </div>
+
     </ion-item>
   </ion-list>
+  <div text-center *ngIf="regmsg">Sem registro de alugel</div>
 </ion-content>

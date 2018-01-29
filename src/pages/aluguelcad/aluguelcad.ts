@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AluguelModel } from '../../models/aluguel/aluguel-model';
 
 import { Aluguel } from '../../interface/aluguel';
-import { Produtos } from '../../interface/produtos';
 
 import { ProdutosModel } from '../../models/produtos/produtos-model';
 
@@ -16,7 +15,7 @@ export class AluguelcadPage {
 
   public formdata:Aluguel;
 
-  public produtos:Produtos;
+  public produtos:any;
 
   public selectOptionsProduto:any;
 
@@ -68,7 +67,9 @@ export class AluguelcadPage {
   }
 
   openModel(){
-    this.produtos = this.mProduto.get();
+    this.mProduto.open().then((data)=>{
+      this.produtos = data;
+    });
   }
 
   setTempo(){
@@ -108,7 +109,7 @@ export class AluguelcadPage {
 
   save(){
     //console.log(this.formdata);
-    this.mAluguel.set(this.formdata);
+    this.mAluguel.add(this.formdata);
     this.navCtrl.pop();
   }
   calcHora(h,min){

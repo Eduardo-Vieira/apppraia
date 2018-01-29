@@ -11,10 +11,7 @@ export class ProdutosModel {
   private modelo:any;
 
   constructor(private db: Storage) {
-    //abrir Dados do Storage
-    db.get(this.tableName).then((data)=>{
-      this.modelo = (data!=null) ?  JSON.parse(data) : [];
-    });
+
   }
 
   autoNumber(){
@@ -25,7 +22,7 @@ export class ProdutosModel {
    * Salvar dados
    * @param data interface
    */
-  set(data:Produtos){
+  add(data:Produtos){
     // autoNumber
     data.regidProd = this.autoNumber();
     //add linha no modelo
@@ -34,6 +31,10 @@ export class ProdutosModel {
     this.db.set(this.tableName,JSON.stringify(this.modelo));
   }
 
+  /**
+   * Atualizar dados
+   * @param data
+   */
   update(data:Produtos){
     this.modelo.forEach(e => {
       if(data.regidProd == e.regidProd){
@@ -58,11 +59,17 @@ export class ProdutosModel {
   }
 
   /**
-   * get modelo
+   * open modelo
    * @return modelo
    */
-  get(){
-    return this.modelo;
+  open(){
+    return new Promise(resolve=>{
+      //abrir Dados do Storage
+      this.db.get(this.tableName).then((data)=>{
+        this.modelo = (data!=null) ?  JSON.parse(data) : [];
+        resolve(this.modelo);
+      });
+    });
   }
 
 }

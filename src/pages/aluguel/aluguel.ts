@@ -15,29 +15,39 @@ import { AluguelModel } from '../../models/aluguel/aluguel-model';
 export class AluguelPage {
 
   public aluguel:any;
-
-  // public aluguel:any = [
-  //   {id:1, data:'25/01/2018', produto:'Sup', cod:'1', codTempo:'A',tempo:'00:30:00',tempoInicio:'20:50:00', tempofim:'21:40:00',valoraluguel:'20,00',cliente:'Eduardo', qtdColete:'2', deposito:'20,00', isPago:'', status:''},
-  //   {id:2, data:'25/01/2018', produto:'Sup', cod:'1', codTempo:'A',tempo:'00:30:00',tempoInicio:'20:50:00', tempofim:'21:40:00',valoraluguel:'20,00',cliente:'Eduardo', qtdColete:'2', deposito:'20,00', isPago:'', status:''},
-  //   {id:3, data:'25/01/2018', produto:'Sup', cod:'1', codTempo:'A',tempo:'00:30:00',tempoInicio:'20:08:00', tempofim:'20:38:00',valoraluguel:'20,00',cliente:'Eduardo', qtdColete:'2', deposito:'20,00', isPago:'', status:''},
-  //   {id:4, data:'25/01/2018', produto:'Sup', cod:'1', codTempo:'A',tempo:'00:30:00',tempoInicio:'20:08:00', tempofim:'',valoraluguel:'20,00',cliente:'Eduardo', qtdColete:'2', deposito:'20,00', isPago:'', status:''},
-  //   {id:5, data:'25/01/2018', produto:'Sup', cod:'1', codTempo:'A',tempo:'00:30:00',tempoInicio:'20:08:00', tempofim:'20:38:00',valoraluguel:'20,00',cliente:'Eduardo', qtdColete:'2', deposito:'20,00', isPago:'', status:''},
-  //   {id:6, data:'25/01/2018', produto:'Sup', cod:'1', codTempo:'A',tempo:'00:30:00',tempoInicio:'20:08:00', tempofim:'20:38:00',valoraluguel:'20,00',cliente:'Eduardo', qtdColete:'2', deposito:'20,00', isPago:'', status:''},
-  //   {id:7, data:'25/01/2018', produto:'Caiak', cod:'2', codTempo:'A',tempo:'00:30:00',tempoInicio:'20:08:00', tempofim:'',valoraluguel:'20,00',cliente:'Nelson', qtdColete:'3', deposito:'10,00', isPago:'', status:''},
-  // ];
+  public regmsg:boolean = true;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public alertCtrl: AlertController,
               public mAluguel:AluguelModel) {
-  }
+
+              }
 
   openModel(){
-      this.aluguel = this.mAluguel.get();
+    // Open dados
+    this.mAluguel.open().then((data:any)=>{
+      if(data && data!=[])
+      {
+        this.regmsg = false;
+        this.aluguel = this.verificarFechamento(data);
+      }
+    });
+  }
+
+  verificarFechamento(data){
+    let r:any=[];
+    data.forEach(e => {
+      //verificar se não esta fechado
+      if(e.isDevolvido.toLowerCase() != "sim"){
+        r.push(e);
+      }
+    });
+    return r;
   }
 
   ionViewWillEnter(){
-    this.openModel()
+    this.openModel();
       //Varificar se tem algum fora do tempo fim
       setInterval(() => {
          this.atualizarStatus();
@@ -64,8 +74,33 @@ export class AluguelPage {
   }
 
   deleteAluguel(item:any){
-    this.mAluguel.remove(item);
-    this.openModel();
+    let prompt = this.alertCtrl.create({
+      title: 'Fecha Aluguel',
+      message: "Você deseja Remover essa conta de Aluguel? Caso queira digite sim na caixa de texto.",
+      inputs: [
+        {
+          name: 'Fechamento',
+          placeholder: 'Sim'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'OK',
+          handler: data => {
+            if(data.toLowerCase()=='sim'){
+              this.aluguel = this.verificarFechamento(this.mAluguel.remove(item));
+            }
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   fechaAluguel(item:any){
@@ -88,11 +123,14 @@ export class AluguelPage {
         {
           text: 'Salvar',
           handler: data => {
-            this.aluguel.forEach(e => {
-              if(e.id == item.id){
-                e.isPago = data.Fechamento;
-              }
-            });
+            if(data.toLowerCase()=='sim'){
+              this.aluguel.forEach(e => {
+                if(e.regid == item.regid){
+                  e.isDevolvido = data.Fechamento;
+                  this.mAluguel.update(e); //Salvar no db
+                }
+              });
+            }
           }
         }
       ]
