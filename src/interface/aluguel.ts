@@ -2,7 +2,7 @@
  * Interface de Aluguel
  */
 export interface Aluguel {
-  regid:string,
+  regid:number,
   data:string,
   produto:string,
   cod:string,

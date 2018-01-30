@@ -1,13 +1,14 @@
-<ion-menu [content]="content">
+<ion-menu [enabled]="authLogin.getIsLogin()" [content]="content">
   <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
+    <ion-toolbar color="dark">
+      <ion-title>{{ authLogin.getUsername() }}</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content>
-    <ion-list>
+    <ion-list no-lines>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        <ion-icon item-start color="primary" [name]="p.ico"></ion-icon>
         {{p.title}}
       </button>
     </ion-list>

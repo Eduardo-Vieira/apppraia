@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
-import { Aluguel } from '../../interface/aluguel';
+import { Users } from '../../interface/users';
 
 @Injectable()
-export class AluguelModel {
+export class UsersModel {
 
-  private tableName = 'aluguel';
+  private tableName = 'users';
 
-  private modelo:Array<Aluguel>;
+  private modelo:any = [];
 
   constructor(private db: Storage) {
 
@@ -26,9 +26,9 @@ export class AluguelModel {
    * Salvar dados
    * @param data interface
    */
-  add(data:Aluguel){
+  add(data:Users){
     // autoNumber
-    data.regid = this.autoNumber();
+    data.iduser = this.autoNumber();
     //add linha no modelo
     this.modelo.push(data);
     //Salvar no storage
@@ -39,9 +39,9 @@ export class AluguelModel {
    * Atualizar dados
    * @param data
    */
-  update(data:Aluguel){
+  update(data:Users){
     this.modelo.forEach(e => {
-      if(data.regid == e.regid){
+      if(data.iduser == e.iduser){
         //set row para update
         e = data;
         //Salvar no storage
@@ -50,18 +50,18 @@ export class AluguelModel {
     });
   }
 
-  remove(data:Aluguel){
+  remove(data:Users){
     let newarra:any = [];
     this.modelo.forEach(e => {
-      if(data.regid != e.regid){
+      if(data.iduser != e.iduser){
         newarra.push(e);
       }
     });
     //Salvar no storage
     this.modelo = newarra;
     this.db.set(this.tableName,JSON.stringify(newarra));
-    return this.modelo;
   }
+
   /**
    * open modelo
    * @return modelo

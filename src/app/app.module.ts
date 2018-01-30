@@ -17,12 +17,15 @@ import { DadosProvider } from '../providers/dados/dados';
  */
 import { AluguelPageModule } from '../pages/aluguel/aluguel.module';
 import { ProdutosPageModule } from '../pages/produtos/produtos.module';
+import { LoginPageModule } from '../pages/login/login.module';
 
 /**
  * db Models
  */
 import { AluguelModel } from '../models/aluguel/aluguel-model';
 import { ProdutosModel } from '../models/produtos/produtos-model';
+import { LoginModel } from '../models/login/login-model';
+import { UsersModel } from '../models/users/users-model';
 
 
 @NgModule({
@@ -37,6 +40,7 @@ import { ProdutosModel } from '../models/produtos/produtos-model';
       name: '__dbapppraia',
          driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
+    LoginPageModule,
     AluguelPageModule,
     ProdutosPageModule
   ],
@@ -49,8 +53,10 @@ import { ProdutosModel } from '../models/produtos/produtos-model';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DadosProvider,
+    LoginModel,
     AluguelModel,
-    ProdutosModel
+    ProdutosModel,
+    UsersModel
   ]
 })
 export class AppModule {}

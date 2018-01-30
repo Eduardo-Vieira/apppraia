@@ -1,0 +1,18 @@
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label>Usuário:</ion-label>
+      <ion-input type="text" [(ngModel)]="formdata.login"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Senha:</ion-label>
+      <ion-input type="password" [(ngModel)]="formdata.password"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <div padding>
+    <button ion-button block color="primary" (click)="doEntrar()">Entrar</button>
+  </div>
+  <div text-center padding-top color="danger">{{errmsg}}</div>
+
+</ion-content>
