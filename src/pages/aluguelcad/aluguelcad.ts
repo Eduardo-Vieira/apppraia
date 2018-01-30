@@ -33,8 +33,7 @@ export class AluguelcadPage {
               public navParams: NavParams,
               public mAluguel:AluguelModel,
               public mProduto:ProdutosModel) {
-                this.formdata = {regid:0,
-                                 data:'',
+                this.formdata = {data:'',
                                  produto:'',
                                  cod:'',
                                  codTempo:'',

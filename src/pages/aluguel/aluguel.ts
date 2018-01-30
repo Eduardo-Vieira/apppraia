@@ -75,11 +75,11 @@ export class AluguelPage {
 
   deleteAluguel(item:any){
     let prompt = this.alertCtrl.create({
-      title: 'Fecha Aluguel',
+      title: 'Remover Aluguel',
       message: "Você deseja Remover essa conta de Aluguel? Caso queira digite sim na caixa de texto.",
       inputs: [
         {
-          name: 'Fechamento',
+          name: 'del',
           placeholder: 'Sim'
         },
       ],
@@ -93,8 +93,9 @@ export class AluguelPage {
         {
           text: 'OK',
           handler: data => {
-            if(data.toLowerCase()=='sim'){
-              this.aluguel = this.verificarFechamento(this.mAluguel.remove(item));
+            console.log(data);
+            if(data.del.toLowerCase() == 'sim'){
+              this.aluguel = this.mAluguel.remove(item);
             }
           }
         }
@@ -123,7 +124,7 @@ export class AluguelPage {
         {
           text: 'Salvar',
           handler: data => {
-            if(data.toLowerCase()=='sim'){
+            if(data.Fechamento.toLowerCase()=='sim'){
               this.aluguel.forEach(e => {
                 if(e.regid == item.regid){
                   e.isDevolvido = data.Fechamento;

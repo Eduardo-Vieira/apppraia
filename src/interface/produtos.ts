@@ -2,7 +2,7 @@
  * Interface de Produtos
  */
 export interface Produtos {
-  regidProd:number,
+  regidProd?:number,
   descricao:string,
   isActive:string
 }

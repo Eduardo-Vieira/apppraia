@@ -16,7 +16,7 @@ export class LoginModel {
     //criar usuáiro admin caso não exita
     this.db.get(this.users.getTableName()).then((data)=>{
       if(data == null){
-        this.users.add({iduser:'0',
+        this.users.add({
                   username:'Administrador',
                   login:'admin',
                   password:'admin',

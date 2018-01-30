@@ -2,7 +2,7 @@
  * Interface de Users
  */
 export interface Users {
-  iduser:string,
+  iduser?:number,
   username:string,
   login:string,
   password:string,
