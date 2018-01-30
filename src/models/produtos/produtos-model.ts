@@ -8,7 +8,7 @@ export class ProdutosModel {
 
   private tableName = 'produtos';
 
-  private modelo:any = [];
+  private modelo:Array<Produtos>;
 
   constructor(private db: Storage) {
 

@@ -14,7 +14,7 @@ export class ProdutoseditPage {
   public formdata:Produtos;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public produtos:ProdutosModel) {
-    this.formdata = { regidProd:'',
+    this.formdata = { regidProd: 0,
                       descricao:'',
                       isActive:''
                     };
